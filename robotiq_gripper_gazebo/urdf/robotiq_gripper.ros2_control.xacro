@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="robotiq_gripper_ros2_control" params="name prefix use_fake_hardware:=true fake_sensor_commands:=true">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+
+        <!-- Parameters -->
+        <param name="robot_param_node">robot_description</param>
+        <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+        <param name="state_interfaces_lag">0.0</param>
+
+        <!-- **THIS IS CRUCIAL** -->
+        <param name="joints">[${prefix}robotiq_85_left_knuckle_joint]</param>
+        <param name="command_interfaces">[position]</param>
+        <param name="state_interfaces">[position]</param>
+
+      </hardware>
+
+      <!-- Joint Interfaces -->
+      <joint name="${prefix}robotiq_85_left_knuckle_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+      </joint>
+
+    </ros2_control>
+
+  </xacro:macro>
+
+</robot>
