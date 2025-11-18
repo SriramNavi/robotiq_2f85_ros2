@@ -42,14 +42,13 @@ ros2 launch robotiq_gripper_gazebo launch_gripper_gazebo.py
 
 ## ✋ Control the Gripper
 
-### **Open**
-
-``` bash
+### **Open:**
+```bash
 ros2 topic pub --once /robotiq_gripper_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "joint_names:
 - 'robotiq_85_left_knuckle_joint'
 points:
 - positions: [0.0]
-  time_from_start: {sec: 1}"
+  time_from_start: {sec: 2, nanosec: 0}
 ```
 
 ### **Close**
@@ -59,7 +58,7 @@ ros2 topic pub --once /robotiq_gripper_controller/joint_trajectory trajectory_ms
 - 'robotiq_85_left_knuckle_joint'
 points:
 - positions: [0.8]
-  time_from_start: {sec: 1}"
+  time_from_start: {sec: 2, nanosec: 0}
 ```
 
 ------------------------------------------------------------------------
