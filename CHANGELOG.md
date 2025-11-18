@@ -1,35 +1,70 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
-and this project adheres to [Semantic Versioning](https://semver.org/).
+This project follows semantic versioning: MAJOR.MINOR.PATCH
 
 ---
 
-## [0.1.0] - 2025-02-XX
+## [0.1.0] - 2025-11-18
 ### Added
-- Initial ROS 2 Jazzy + Gazebo Harmonic port of the Robotiq 2F-85 gripper.
-- Converted original ROS1 xacro and description files to ROS2 structure.
-- Implemented full `gz_ros2_control` integration.
-- Added working `JointTrajectoryController`.
-- Added `joint_state_broadcaster`.
-- Added standalone simulation launch file (`launch_gripper_gazebo.py`).
-- Added Gazebo Harmonic-compatible world and plugin configuration.
-- Added complete YAML controller configs.
-- Added initial README and MIT License.
-- Added CI workflow template (GitHub Actions).
-- Added ROS 2 command examples for opening/closing the gripper.
+- Initial ROS 2 port of the Robotiq 2F-85 gripper for **ROS 2 Jazzy** and **Gazebo Harmonic**.
+- Complete `robotiq_description` package with original URDF/Xacro files.
+- `robotiq_gripper_gazebo` package including:
+  - Gazebo Harmonic-compatible SDF and world files.
+  - ROS 2 control integration via `gz_ros2_control`.
+  - Working `joint_state_broadcaster`.
+  - Working `robotiq_gripper_controller` using `JointTrajectoryController`.
+  - TF tree publication through robot_state_publisher.
+  - Automatic spawning in Gazebo + delayed controller load.
+  - Clock bridging (`/clock`) from Gazebo → ROS 2.
+- Fully functional launch system supporting:
+  - GUI / Headless Gazebo
+  - Custom world files
+  - URDF/Xacro selection
+  - Parameter-based robot description injection
+- Clean controller YAMLs with realistic constraints.
+- Working open/close trajectory commands.
 
-### Known Issues
-- Gazebo GUI warnings related to Qt binding loops (cosmetic, upstream).
-- Minor physics tolerances when closing gripper at extreme positions.
+### Changed
+- Updated package structure to follow ROS 2 best practices.
+- Cleaned CMakeLists & package.xml:
+  - Removed unused dependencies.
+  - Added missing runtime dependencies.
+  - Reorganized install rules.
+- Normalized file layout: `launch/`, `config/`, `urdf/`, `worlds/`.
+- Improved naming consistency of nodes, controllers, parameters, and paths.
+
+### Fixed
+- Controller timing issues caused by no clock source.
+- Startup race conditions between robot spawn and controller manager.
+- Incorrect controller parameter loading order.
+- Missing `/clock` bridge that prevented deterministic simulation time.
+- Joint trajectory tolerance warnings via proper constraint definitions.
+- Handled fixed-joint skip warnings cleanly.
+- Eliminated robot description duplication warnings.
+
+### Known Limitations
+- Only simulates the left knuckle joint (mechanically coupled finger behavior not implemented yet).
+- No hardware interface for real Robotiq devices — **simulation only**.
+- Uses Bullet Featherstone physics; performance may vary.
+- No Gazebo control plugin for advanced grasping interactions yet.
+
+### Roadmap
+#### Planned for v0.2.x
+- Add mechanical mimic joints to fully animate all fingers.
+- Provide `ros2_control`-native mimic joint interface.
+- Improve grasping behavior via Gazebo contact parameters.
+- Provide MoveIt configuration package.
+- Add example pick-and-place demo.
+
+#### Planned for v1.x.x
+- Add real hardware interface (`serial` / `modbus`).
+- Provide multi-gripper support.
+- Convert URDF to full SDF with friction tuning.
+- Package release on **ROS 2 build farm** (bloom).
 
 ---
 
-## [Unreleased]
-### Planned
-- Add Python API for scripted gripper control.
-- Add URDF parameters for friction/contact tuning.
-- Add example RViz + MoveIt2 configuration.
-- Add video/GIF demonstration for README.
-- Publish release tags for binary distributions.
+## Format
+Each release follows:
+
