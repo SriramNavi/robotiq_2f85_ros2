@@ -62,7 +62,20 @@ ros2 launch robotiq_gripper_gazebo launch_gripper_gazebo.py
 ### Test controllers:
 Open:
 ```bash
-ros2 topic pub --once /robotiq_gripper_controller/joint_trajectory ...
+ros2 topic pub --once /robotiq_gripper_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "joint_names:
+- 'robotiq_85_left_knuckle_joint'
+points:
+- positions: [0.0]
+  time_from_start: {sec: 2, nanosec: 0}
+```
+
+Close:
+```bash
+ros2 topic pub --once /robotiq_gripper_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "joint_names:
+- 'robotiq_85_left_knuckle_joint'
+points:
+- positions: [0.8]
+  time_from_start: {sec: 2, nanosec: 0}
 ```
 
 Ensure:
