@@ -1,14 +1,14 @@
 # Robotiq 2F-85 Gripper --- ROS 2 Jazzy + Gazebo Harmonic
 
 A fully-working ROS 2 Jazzy + Gazebo Harmonic port of the official ROS1
-Robotiq 2F-85 package.\
+Robotiq 2F-85 package.
 This version includes:
 
--   Updated URDF/Xacro\
--   Working `gz_ros2_control` plugin\
--   JointTrajectory controller\
--   Gazebo Harmonic support\
--   Clean launch pipeline\
+-   Updated URDF/Xacro
+-   Working `gz_ros2_control` plugin
+-   JointTrajectory controller
+-   Gazebo Harmonic support
+-   Clean launch pipeline
 -   Compatible command API for opening/closing the gripper
 
 ------------------------------------------------------------------------
@@ -18,7 +18,7 @@ This version includes:
     robotiq_description
     robotiq_gripper_gazebo
 
--   `robotiq_description`: Xacro + meshes\
+-   `robotiq_description`: Xacro + meshes
 -   `robotiq_gripper_gazebo`: Gazebo simulation + controllers
 
 ------------------------------------------------------------------------
@@ -82,9 +82,9 @@ MIT License --- see `LICENSE`.
 
 PRs welcome.
 
-Tested on:\
-- Ubuntu 24.04\
-- ROS 2 Jazzy\
+Tested on:
+- Ubuntu 24.04
+- ROS 2 Jazzy
 - Gazebo Harmonic
 
 ------------------------------------------------------------------------
